@@ -4,7 +4,6 @@ import { UserInfo } from '../types';
 import { QuoteCard } from './QuoteCard';
 import { QuoteBrowser } from './QuoteBrowser';
 import { TravelBrowser } from './TravelBrowser';
-import { TravelPlanner } from './TravelPlanner';
 import { HabitCard } from './HabitCard';
 import { FortuneCard } from './FortuneCard';
 import { SajuAnalysisCard } from './SajuAnalysisCard';
@@ -13,7 +12,7 @@ import { TravelCard } from './TravelCard';
 import { EditInfoModal } from './EditInfoModal';
 import { quotes, habits, books, travels, getRandomItem, generateFortune } from '../data/content';
 import { generateDailyFortune, generateSajuAnalysis } from '../utils/fortuneUtils';
-import { Search, BookOpen, MapPin, Calendar } from 'lucide-react';
+import { Search, BookOpen, MapPin } from 'lucide-react';
 
 interface DashboardProps {
   userInfo: UserInfo;
@@ -43,10 +42,8 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isQuoteBrowserOpen, setIsQuoteBrowserOpen] = useState(false);
   const [isTravelBrowserOpen, setIsTravelBrowserOpen] = useState(false);
-  const [isTravelPlannerOpen, setIsTravelPlannerOpen] = useState(false);
   const [favoriteQuotes, setFavoriteQuotes] = useState<string[]>([]);
   const [favoriteTravels, setFavoriteTravels] = useState<string[]>([]);
-  const [travelPlans, setTravelPlans] = useState<any[]>([]);
   
   const seed = getDailySeed();
   const todayQuote = getRandomItem(quotes || [], seed);
@@ -97,9 +94,6 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
     }
   };
 
-  const handleTravelPlanSave = (plan: any) => {
-    setTravelPlans(prev => [...prev, plan]);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 p-2 sm:p-4 md:p-8">
@@ -133,16 +127,6 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
                 <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">추천 여행지</span>
                 <span className="sm:hidden">여행</span>
-              </Button>
-              <Button
-                onClick={() => setIsTravelPlannerOpen(true)}
-                variant="outline"
-                size="sm"
-                className="rounded-lg hover:bg-gray-100 text-xs sm:text-sm"
-              >
-                <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                <span className="hidden sm:inline">여행 계획</span>
-                <span className="sm:hidden">계획</span>
               </Button>
               <Button
                 onClick={() => setIsEditModalOpen(true)}
@@ -215,13 +199,6 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
         />
       )}
 
-      {/* Travel Planner */}
-      {isTravelPlannerOpen && (
-        <TravelPlanner
-          onClose={() => setIsTravelPlannerOpen(false)}
-          onSave={handleTravelPlanSave}
-        />
-      )}
     </div>
   );
 }

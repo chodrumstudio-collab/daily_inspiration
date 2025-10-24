@@ -105,7 +105,7 @@ export function TravelBrowser({ onClose, onFavorite, onShare }: TravelBrowserPro
         <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <div className="flex items-center gap-2">
             <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />
-            <h2 className="text-lg sm:text-2xl font-bold text-gray-900">여행 브라우저</h2>
+            <h2 className="text-lg sm:text-2xl font-bold text-gray-900">추천 여행지</h2>
           </div>
           <Button variant="ghost" size="sm" onClick={onClose}>
             <X className="w-4 h-4 sm:w-5 sm:h-5" />

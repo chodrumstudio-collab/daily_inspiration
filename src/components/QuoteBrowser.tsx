@@ -111,7 +111,7 @@ export function QuoteBrowser({ onClose, onFavorite, onShare }: QuoteBrowserProps
       <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-6xl my-4 sm:my-8 overflow-hidden">
         {/* 헤더 */}
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold text-gray-900">명언 브라우저</h2>
+          <h2 className="text-2xl font-bold text-gray-900">오늘의 명언</h2>
           <Button variant="ghost" size="sm" onClick={onClose}>
             <X className="w-5 h-5" />
           </Button>
