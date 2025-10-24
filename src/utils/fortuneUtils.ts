@@ -57,9 +57,17 @@ export function generateDailyFortune(userInfo: UserInfo): DailyFortune {
   const today = new Date();
   const dateStr = today.toISOString().split('T')[0];
   
+  // 안전한 사용자 정보 처리
+  const safeBirthYear = userInfo.birthYear || new Date().getFullYear();
+  const safeBirthMonth = userInfo.birthMonth || 1;
+  const safeBirthDay = userInfo.birthDay || 1;
+  
   // 사용자 정보 기반으로 운세 점수 생성 (일관성을 위해 시드 사용)
-  const seed = userInfo.birthYear + userInfo.birthMonth + userInfo.birthDay;
-  const random = (multiplier: number) => (seed * multiplier) % 100;
+  const seed = safeBirthYear + safeBirthMonth + safeBirthDay;
+  const random = (multiplier: number) => {
+    const result = (seed * multiplier) % 100;
+    return isNaN(result) ? 50 : result;
+  };
   
   const overall = Math.floor(random(1.7) + 30); // 30-100
   const love = Math.floor(random(2.3) + 20); // 20-100
@@ -112,6 +120,14 @@ export function generateDailyFortune(userInfo: UserInfo): DailyFortune {
 }
 
 export function generateSajuAnalysis(userInfo: UserInfo): SajuAnalysis {
+  // 안전한 사용자 정보 처리
+  const safeBirthYear = userInfo.birthYear || new Date().getFullYear();
+  const safeBirthMonth = userInfo.birthMonth || 1;
+  const safeBirthDay = userInfo.birthDay || 1;
+  const safeBirthTime = userInfo.birthTime || '오전';
+  const safeGender = userInfo.gender || 'male';
+  const safeZodiac = userInfo.zodiac || '쥐';
+  
   // 간단한 사주 분석 (실제로는 더 복잡한 계산이 필요)
   const elements = {
     wood: Math.floor(Math.random() * 20) + 10,
@@ -124,18 +140,19 @@ export function generateSajuAnalysis(userInfo: UserInfo): SajuAnalysis {
   // 총합을 100으로 정규화
   const total = Object.values(elements).reduce((sum, val) => sum + val, 0);
   Object.keys(elements).forEach(key => {
-    elements[key] = Math.round((elements[key] / total) * 100);
+    const normalized = Math.round((elements[key] / total) * 100);
+    elements[key] = isNaN(normalized) ? 20 : normalized;
   });
   
-  const personality = getPersonalityDescription(elements, userInfo.zodiac);
-  const compatibility = getCompatibility(userInfo.zodiac);
-  const lifePath = getLifePathDescription(userInfo.birthYear, userInfo.gender);
+  const personality = getPersonalityDescription(elements, safeZodiac);
+  const compatibility = getCompatibility(safeZodiac);
+  const lifePath = getLifePathDescription(safeBirthYear, safeGender);
   
   return {
-    year: `${userInfo.birthYear}년`,
-    month: `${userInfo.birthMonth}월`,
-    day: `${userInfo.birthDay}일`,
-    time: userInfo.birthTime,
+    year: `${safeBirthYear}년`,
+    month: `${safeBirthMonth}월`,
+    day: `${safeBirthDay}일`,
+    time: safeBirthTime,
     elements,
     personality,
     compatibility,
