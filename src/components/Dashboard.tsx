@@ -3,6 +3,8 @@ import { Button } from './ui/button';
 import { UserInfo } from '../types';
 import { QuoteCard } from './QuoteCard';
 import { QuoteBrowser } from './QuoteBrowser';
+import { TravelBrowser } from './TravelBrowser';
+import { TravelPlanner } from './TravelPlanner';
 import { HabitCard } from './HabitCard';
 import { FortuneCard } from './FortuneCard';
 import { SajuAnalysisCard } from './SajuAnalysisCard';
@@ -11,7 +13,7 @@ import { TravelCard } from './TravelCard';
 import { EditInfoModal } from './EditInfoModal';
 import { quotes, habits, books, travels, getRandomItem, generateFortune } from '../data/content';
 import { generateDailyFortune, generateSajuAnalysis } from '../utils/fortuneUtils';
-import { Search, BookOpen } from 'lucide-react';
+import { Search, BookOpen, MapPin, Calendar } from 'lucide-react';
 
 interface DashboardProps {
   userInfo: UserInfo;
@@ -40,7 +42,11 @@ function formatDate() {
 export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isQuoteBrowserOpen, setIsQuoteBrowserOpen] = useState(false);
+  const [isTravelBrowserOpen, setIsTravelBrowserOpen] = useState(false);
+  const [isTravelPlannerOpen, setIsTravelPlannerOpen] = useState(false);
   const [favoriteQuotes, setFavoriteQuotes] = useState<string[]>([]);
+  const [favoriteTravels, setFavoriteTravels] = useState<string[]>([]);
+  const [travelPlans, setTravelPlans] = useState<any[]>([]);
   
   const seed = getDailySeed();
   const todayQuote = getRandomItem(quotes, seed);
@@ -71,6 +77,30 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
     }
   };
 
+  const handleTravelFavorite = (travelId: string) => {
+    setFavoriteTravels(prev => 
+      prev.includes(travelId) 
+        ? prev.filter(id => id !== travelId)
+        : [...prev, travelId]
+    );
+  };
+
+  const handleTravelShare = (travel: any) => {
+    if (navigator.share) {
+      navigator.share({
+        title: '여행지 추천',
+        text: `${travel.place} - ${travel.description}`,
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(`${travel.place} - ${travel.description}`);
+    }
+  };
+
+  const handleTravelPlanSave = (plan: any) => {
+    setTravelPlans(prev => [...prev, plan]);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 p-4 md:p-8">
       <div className="max-w-6xl mx-auto space-y-6">
@@ -91,6 +121,22 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
               >
                 <BookOpen className="w-4 h-4 mr-2" />
                 명언 브라우저
+              </Button>
+              <Button
+                onClick={() => setIsTravelBrowserOpen(true)}
+                variant="outline"
+                className="rounded-lg hover:bg-gray-100"
+              >
+                <MapPin className="w-4 h-4 mr-2" />
+                여행 브라우저
+              </Button>
+              <Button
+                onClick={() => setIsTravelPlannerOpen(true)}
+                variant="outline"
+                className="rounded-lg hover:bg-gray-100"
+              >
+                <Calendar className="w-4 h-4 mr-2" />
+                여행 계획
               </Button>
               <Button
                 onClick={() => setIsEditModalOpen(true)}
@@ -150,6 +196,23 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
           onClose={() => setIsQuoteBrowserOpen(false)}
           onFavorite={handleQuoteFavorite}
           onShare={handleQuoteShare}
+        />
+      )}
+
+      {/* Travel Browser */}
+      {isTravelBrowserOpen && (
+        <TravelBrowser
+          onClose={() => setIsTravelBrowserOpen(false)}
+          onFavorite={handleTravelFavorite}
+          onShare={handleTravelShare}
+        />
+      )}
+
+      {/* Travel Planner */}
+      {isTravelPlannerOpen && (
+        <TravelPlanner
+          onClose={() => setIsTravelPlannerOpen(false)}
+          onSave={handleTravelPlanSave}
         />
       )}
     </div>

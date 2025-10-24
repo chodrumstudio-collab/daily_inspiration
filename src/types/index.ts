@@ -35,10 +35,59 @@ export interface Book {
 }
 
 export interface Travel {
+  id: string;
   country: string;
+  region: string;
   place: string;
   description: string;
   attractions: string[];
+  bestTime: string;
+  duration: string;
+  budget: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  category: string;
+  tags: string[];
+  images: string[];
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  isFavorite?: boolean;
+  rating?: number;
+  reviews?: TravelReview[];
+}
+
+export interface TravelReview {
+  id: string;
+  author: string;
+  rating: number;
+  comment: string;
+  date: string;
+  helpful: number;
+}
+
+export interface TravelPlan {
+  id: string;
+  title: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  destinations: string[];
+  budget: number;
+  isPublic: boolean;
+  createdAt: string;
+}
+
+export interface TravelGuide {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  tags: string[];
+  author: string;
+  createdAt: string;
+  views: number;
+  helpful: number;
 }
 
 export interface Fortune {
