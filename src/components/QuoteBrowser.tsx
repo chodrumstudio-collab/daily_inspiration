@@ -170,7 +170,7 @@ export function QuoteBrowser({ onClose, onFavorite, onShare }: QuoteBrowserProps
         </div>
 
         {/* 결과 섹션 */}
-        <div className="p-6 overflow-y-auto max-h-[60vh]">
+        <div className="p-6 overflow-y-auto max-h-[70vh] sm:max-h-[60vh]">
           <div className="mb-4 flex items-center justify-between">
             <p className="text-gray-600">
               {filteredQuotes.length}개의 명언을 찾았습니다

@@ -90,7 +90,7 @@ export function QuoteStats({ favoriteQuotes, onClose }: QuoteStatsProps) {
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[70vh]">
+        <div className="p-6 overflow-y-auto max-h-[75vh] sm:max-h-[70vh]">
           {/* 전체 통계 */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <Card>

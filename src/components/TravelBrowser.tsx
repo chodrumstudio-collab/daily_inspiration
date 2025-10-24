@@ -186,7 +186,7 @@ export function TravelBrowser({ onClose, onFavorite, onShare }: TravelBrowserPro
               </div>
             </div>
 
-            <div className="grid gap-6">
+            <div className="grid gap-6 overflow-y-auto max-h-[70vh] sm:max-h-[60vh]">
               {filteredTravels.map((travel) => (
                 <Card key={travel.id} className="hover:shadow-md transition-shadow">
                   <CardHeader className="pb-3">
