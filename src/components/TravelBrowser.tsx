@@ -99,29 +99,29 @@ export function TravelBrowser({ onClose, onFavorite, onShare }: TravelBrowserPro
   const difficulties = ['전체', 'easy', 'medium', 'hard'];
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-6xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden">
         {/* 헤더 */}
-        <div className="flex items-center justify-between p-6 border-b">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <div className="flex items-center gap-2">
-            <MapPin className="w-6 h-6 text-blue-500" />
-            <h2 className="text-2xl font-bold text-gray-900">여행 브라우저</h2>
+            <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />
+            <h2 className="text-lg sm:text-2xl font-bold text-gray-900">여행 브라우저</h2>
           </div>
           <Button variant="ghost" size="sm" onClick={onClose}>
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-          <TabsList className="grid w-full grid-cols-2 mx-6 mt-6">
-            <TabsTrigger value="destinations">여행지</TabsTrigger>
-            <TabsTrigger value="guides">여행 가이드</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mx-4 sm:mx-6 mt-4 sm:mt-6">
+            <TabsTrigger value="destinations" className="text-xs sm:text-sm">여행지</TabsTrigger>
+            <TabsTrigger value="guides" className="text-xs sm:text-sm">여행 가이드</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="destinations" className="p-6">
+          <TabsContent value="destinations" className="p-4 sm:p-6">
             {/* 필터 섹션 */}
-            <div className="mb-6 p-4 bg-gray-50 rounded-2xl">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 rounded-xl sm:rounded-2xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <Input

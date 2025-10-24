@@ -30,9 +30,9 @@ export function OnboardingCard({ onComplete }: OnboardingCardProps) {
     if (name && birthYear && birthMonth && birthDay && birthTime && gender && zodiac) {
       onComplete({
         name,
-        birthYear: parseInt(birthYear),
-        birthMonth: parseInt(birthMonth),
-        birthDay: parseInt(birthDay),
+        birthYear: parseInt(birthYear, 10) || new Date().getFullYear(),
+        birthMonth: parseInt(birthMonth, 10) || 1,
+        birthDay: parseInt(birthDay, 10) || 1,
         birthTime,
         gender: gender as 'male' | 'female',
         zodiac,

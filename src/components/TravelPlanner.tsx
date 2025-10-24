@@ -89,21 +89,21 @@ export function TravelPlanner({ onClose, onSave }: TravelPlannerProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden">
         {/* 헤더 */}
-        <div className="flex items-center justify-between p-6 border-b">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <div className="flex items-center gap-2">
-            <Calendar className="w-6 h-6 text-green-500" />
-            <h2 className="text-2xl font-bold text-gray-900">여행 계획 만들기</h2>
+            <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
+            <h2 className="text-lg sm:text-2xl font-bold text-gray-900">여행 계획 만들기</h2>
           </div>
           <Button variant="ghost" size="sm" onClick={onClose}>
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[70vh]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="p-4 sm:p-6 overflow-y-auto max-h-[75vh] sm:max-h-[70vh]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {/* 여행 계획 정보 */}
             <div className="space-y-6">
               <Card>
@@ -173,7 +173,11 @@ export function TravelPlanner({ onClose, onSave }: TravelPlannerProps) {
                       type="number"
                       placeholder="1000000"
                       value={plan.budget || ''}
-                      onChange={(e) => setPlan(prev => ({ ...prev, budget: parseInt(e.target.value) || 0 }))}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        const numValue = value === '' ? 0 : parseInt(value, 10);
+                        setPlan(prev => ({ ...prev, budget: isNaN(numValue) ? 0 : numValue }));
+                      }}
                     />
                   </div>
 

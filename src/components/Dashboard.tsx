@@ -102,46 +102,53 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 p-4 md:p-8">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 p-2 sm:p-4 md:p-8">
+      <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6">
         {/* Header */}
-        <div className="bg-white rounded-3xl shadow-lg p-6 md:p-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 md:p-8">
+          <div className="flex flex-col gap-4">
             <div>
-              <h1 className="text-gray-900 mb-2">
+              <h1 className="text-lg sm:text-xl md:text-2xl text-gray-900 mb-2">
                 안녕하세요, {userInfo.name}님! 👋
               </h1>
-              <p className="text-gray-600">{formatDate()}</p>
+              <p className="text-sm sm:text-base text-gray-600">{formatDate()}</p>
             </div>
-            <div className="flex gap-3">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
               <Button
                 onClick={() => setIsQuoteBrowserOpen(true)}
                 variant="outline"
-                className="rounded-lg hover:bg-gray-100"
+                size="sm"
+                className="rounded-lg hover:bg-gray-100 text-xs sm:text-sm"
               >
-                <BookOpen className="w-4 h-4 mr-2" />
-                명언 브라우저
+                <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">명언 브라우저</span>
+                <span className="sm:hidden">명언</span>
               </Button>
               <Button
                 onClick={() => setIsTravelBrowserOpen(true)}
                 variant="outline"
-                className="rounded-lg hover:bg-gray-100"
+                size="sm"
+                className="rounded-lg hover:bg-gray-100 text-xs sm:text-sm"
               >
-                <MapPin className="w-4 h-4 mr-2" />
-                여행 브라우저
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">여행 브라우저</span>
+                <span className="sm:hidden">여행</span>
               </Button>
               <Button
                 onClick={() => setIsTravelPlannerOpen(true)}
                 variant="outline"
-                className="rounded-lg hover:bg-gray-100"
+                size="sm"
+                className="rounded-lg hover:bg-gray-100 text-xs sm:text-sm"
               >
-                <Calendar className="w-4 h-4 mr-2" />
-                여행 계획
+                <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">여행 계획</span>
+                <span className="sm:hidden">계획</span>
               </Button>
               <Button
                 onClick={() => setIsEditModalOpen(true)}
                 variant="outline"
-                className="rounded-lg hover:bg-gray-100"
+                size="sm"
+                className="rounded-lg hover:bg-gray-100 text-xs sm:text-sm"
               >
                 정보 수정
               </Button>
@@ -150,7 +157,7 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
         </div>
 
         {/* Content Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {/* Quote Card - Full Width */}
           <QuoteCard 
             quote={todayQuote} 
