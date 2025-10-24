@@ -99,8 +99,8 @@ export function TravelBrowser({ onClose, onFavorite, onShare }: TravelBrowserPro
   const difficulties = ['전체', 'easy', 'medium', 'hard'];
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
-      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-6xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 flex items-start justify-center p-2 sm:p-4 z-50 overflow-y-auto">
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-6xl my-4 sm:my-8 overflow-hidden">
         {/* 헤더 */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <div className="flex items-center gap-2">
@@ -114,7 +114,7 @@ export function TravelBrowser({ onClose, onFavorite, onShare }: TravelBrowserPro
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
           <TabsList className="grid w-full grid-cols-2 mx-4 sm:mx-6 mt-4 sm:mt-6">
-            <TabsTrigger value="destinations" className="text-xs sm:text-sm">여행지</TabsTrigger>
+            <TabsTrigger value="destinations" className="text-xs sm:text-sm">추천 여행지</TabsTrigger>
             <TabsTrigger value="guides" className="text-xs sm:text-sm">여행 가이드</TabsTrigger>
           </TabsList>
 

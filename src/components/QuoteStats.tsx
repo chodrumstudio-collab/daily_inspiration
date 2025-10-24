@@ -74,8 +74,8 @@ export function QuoteStats({ favoriteQuotes, onClose }: QuoteStatsProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 flex items-start justify-center p-2 sm:p-4 z-50 overflow-y-auto">
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-4xl my-4 sm:my-8 overflow-hidden">
         {/* 헤더 */}
         <div className="flex items-center justify-between p-6 border-b">
           <div className="flex items-center gap-2">
