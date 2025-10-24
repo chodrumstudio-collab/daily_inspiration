@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from './ui/button';
 import { UserInfo } from '../types';
 import { QuoteCard } from './QuoteCard';
+import { QuoteBrowser } from './QuoteBrowser';
 import { HabitCard } from './HabitCard';
 import { FortuneCard } from './FortuneCard';
 import { SajuAnalysisCard } from './SajuAnalysisCard';
@@ -10,6 +11,7 @@ import { TravelCard } from './TravelCard';
 import { EditInfoModal } from './EditInfoModal';
 import { quotes, habits, books, travels, getRandomItem, generateFortune } from '../data/content';
 import { generateDailyFortune, generateSajuAnalysis } from '../utils/fortuneUtils';
+import { Search, BookOpen } from 'lucide-react';
 
 interface DashboardProps {
   userInfo: UserInfo;
@@ -37,6 +39,8 @@ function formatDate() {
 
 export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isQuoteBrowserOpen, setIsQuoteBrowserOpen] = useState(false);
+  const [favoriteQuotes, setFavoriteQuotes] = useState<string[]>([]);
   
   const seed = getDailySeed();
   const todayQuote = getRandomItem(quotes, seed);
@@ -45,6 +49,27 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
   const todayTravel = getRandomItem(travels, seed + 3);
   const todayFortune = generateDailyFortune(userInfo);
   const sajuAnalysis = generateSajuAnalysis(userInfo);
+
+  const handleQuoteFavorite = (quoteId: string) => {
+    setFavoriteQuotes(prev => 
+      prev.includes(quoteId) 
+        ? prev.filter(id => id !== quoteId)
+        : [...prev, quoteId]
+    );
+  };
+
+  const handleQuoteShare = (quote: any) => {
+    if (navigator.share) {
+      navigator.share({
+        title: '오늘의 명언',
+        text: `"${quote.text}" - ${quote.author}`,
+        url: window.location.href
+      });
+    } else {
+      // 폴백: 클립보드에 복사
+      navigator.clipboard.writeText(`"${quote.text}" - ${quote.author}`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 p-4 md:p-8">
@@ -58,20 +83,34 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
               </h1>
               <p className="text-gray-600">{formatDate()}</p>
             </div>
-            <Button
-              onClick={() => setIsEditModalOpen(true)}
-              variant="outline"
-              className="rounded-lg hover:bg-gray-100"
-            >
-              정보 수정
-            </Button>
+            <div className="flex gap-3">
+              <Button
+                onClick={() => setIsQuoteBrowserOpen(true)}
+                variant="outline"
+                className="rounded-lg hover:bg-gray-100"
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                명언 브라우저
+              </Button>
+              <Button
+                onClick={() => setIsEditModalOpen(true)}
+                variant="outline"
+                className="rounded-lg hover:bg-gray-100"
+              >
+                정보 수정
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Content Grid */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Quote Card - Full Width */}
-          <QuoteCard quote={todayQuote} />
+          <QuoteCard 
+            quote={todayQuote} 
+            onFavorite={handleQuoteFavorite}
+            onShare={handleQuoteShare}
+          />
 
           {/* Habit Card */}
           <HabitCard habit={todayHabit} />
@@ -104,6 +143,15 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
         currentInfo={userInfo}
         onSave={onUpdateInfo}
       />
+
+      {/* Quote Browser */}
+      {isQuoteBrowserOpen && (
+        <QuoteBrowser
+          onClose={() => setIsQuoteBrowserOpen(false)}
+          onFavorite={handleQuoteFavorite}
+          onShare={handleQuoteShare}
+        />
+      )}
     </div>
   );
 }

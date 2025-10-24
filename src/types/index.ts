@@ -10,8 +10,15 @@ export interface UserInfo {
 }
 
 export interface Quote {
+  id: string;
   text: string;
   author: string;
+  category: string;
+  tags: string[];
+  mood: string;
+  language: string;
+  isFavorite?: boolean;
+  createdAt?: string;
 }
 
 export interface Habit {

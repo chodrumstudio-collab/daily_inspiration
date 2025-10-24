@@ -1,21 +1,53 @@
 import { Quote, Habit, Book, Travel } from '../types';
 
 export const quotes: Quote[] = [
-  { text: "당신이 할 수 있다고 믿든 할 수 없다고 믿든, 당신이 맞다.", author: "헨리 포드" },
-  { text: "행복은 습관이다. 그것을 몸에 지니라.", author: "허버드" },
-  { text: "오늘 할 수 있는 일을 내일로 미루지 말라.", author: "벤자민 프랭클린" },
-  { text: "삶이 있는 한 희망은 있다.", author: "키케로" },
-  { text: "배움에는 왕도가 없다.", author: "유클리드" },
-  { text: "인생은 자전거를 타는 것과 같다. 균형을 유지하려면 움직여야 한다.", author: "알버트 아인슈타인" },
-  { text: "작은 기회로부터 종종 위대한 업적이 시작된다.", author: "데모스테네스" },
-  { text: "성공은 매일 반복한 작은 노력들의 합이다.", author: "로버트 콜리어" },
-  { text: "실패는 성공의 어머니다.", author: "토마스 에디슨" },
-  { text: "꿈을 계속 간직하고 있으면 반드시 실현할 때가 온다.", author: "괴테" },
-  { text: "시작이 반이다.", author: "아리스토텔레스" },
-  { text: "좋은 일을 하는데 시간을 허비하지 말라.", author: "마크 트웨인" },
-  { text: "변화는 고통스럽지만 성장에는 필수적이다.", author: "로이 T. 베넷" },
-  { text: "당신의 한계는 당신의 상상력이다.", author: "익명" },
-  { text: "긍정적인 마음은 긍정적인 결과를 만든다.", author: "익명" },
+  // 자기계발
+  { id: "1", text: "당신이 할 수 있다고 믿든 할 수 없다고 믿든, 당신이 맞다.", author: "헨리 포드", category: "자기계발", tags: ["성공", "마인드셋"], mood: "motivational", language: "ko" },
+  { id: "2", text: "성공은 매일 반복한 작은 노력들의 합이다.", author: "로버트 콜리어", category: "자기계발", tags: ["성공", "노력"], mood: "motivational", language: "ko" },
+  { id: "3", text: "꿈을 계속 간직하고 있으면 반드시 실현할 때가 온다.", author: "괴테", category: "자기계발", tags: ["꿈", "희망"], mood: "inspirational", language: "ko" },
+  { id: "4", text: "시작이 반이다.", author: "아리스토텔레스", category: "자기계발", tags: ["시작", "행동"], mood: "motivational", language: "ko" },
+  { id: "5", text: "변화는 고통스럽지만 성장에는 필수적이다.", author: "로이 T. 베넷", category: "자기계발", tags: ["변화", "성장"], mood: "challenging", language: "ko" },
+  
+  // 인생철학
+  { id: "6", text: "삶이 있는 한 희망은 있다.", author: "키케로", category: "인생철학", tags: ["희망", "생명"], mood: "hopeful", language: "ko" },
+  { id: "7", text: "인생은 자전거를 타는 것과 같다. 균형을 유지하려면 움직여야 한다.", author: "알버트 아인슈타인", category: "인생철학", tags: ["인생", "균형"], mood: "philosophical", language: "ko" },
+  { id: "8", text: "행복은 습관이다. 그것을 몸에 지니라.", author: "허버드", category: "인생철학", tags: ["행복", "습관"], mood: "peaceful", language: "ko" },
+  { id: "9", text: "오늘 할 수 있는 일을 내일로 미루지 말라.", author: "벤자민 프랭클린", category: "인생철학", tags: ["시간", "행동"], mood: "motivational", language: "ko" },
+  { id: "10", text: "배움에는 왕도가 없다.", author: "유클리드", category: "인생철학", tags: ["학습", "노력"], mood: "educational", language: "ko" },
+  
+  // 성공
+  { id: "11", text: "작은 기회로부터 종종 위대한 업적이 시작된다.", author: "데모스테네스", category: "성공", tags: ["기회", "업적"], mood: "motivational", language: "ko" },
+  { id: "12", text: "실패는 성공의 어머니다.", author: "토마스 에디슨", category: "성공", tags: ["실패", "성공"], mood: "resilient", language: "ko" },
+  { id: "13", text: "좋은 일을 하는데 시간을 허비하지 말라.", author: "마크 트웨인", category: "성공", tags: ["시간", "효율"], mood: "practical", language: "ko" },
+  { id: "14", text: "당신의 한계는 당신의 상상력이다.", author: "익명", category: "성공", tags: ["한계", "상상력"], mood: "creative", language: "ko" },
+  { id: "15", text: "긍정적인 마음은 긍정적인 결과를 만든다.", author: "익명", category: "성공", tags: ["긍정", "결과"], mood: "positive", language: "ko" },
+  
+  // 사랑
+  { id: "16", text: "사랑은 두 사람이 서로를 바라보는 것이 아니라, 함께 같은 방향을 바라보는 것이다.", author: "생텍쥐페리", category: "사랑", tags: ["사랑", "함께"], mood: "romantic", language: "ko" },
+  { id: "17", text: "진정한 사랑은 서로를 완벽하게 만드는 것이 아니라, 서로의 불완전함을 받아들이는 것이다.", author: "익명", category: "사랑", tags: ["사랑", "수용"], mood: "accepting", language: "ko" },
+  { id: "18", text: "사랑은 주는 것이다. 받는 것이 아니다.", author: "빈센트 반 고흐", category: "사랑", tags: ["사랑", "베풂"], mood: "giving", language: "ko" },
+  
+  // 우정
+  { id: "19", text: "진정한 친구는 네가 실수했을 때 너를 용서하고, 네가 옳을 때 너를 기억하는 사람이다.", author: "마야 앤젤루", category: "우정", tags: ["친구", "용서"], mood: "supportive", language: "ko" },
+  { id: "20", text: "친구는 네가 혼자서는 갈 수 없는 곳으로 데려다주는 사람이다.", author: "헨리 데이비드 소로", category: "우정", tags: ["친구", "성장"], mood: "encouraging", language: "ko" },
+  
+  // 시간
+  { id: "21", text: "시간은 가장 귀중한 자산이다. 그것을 어떻게 사용하느냐가 인생을 결정한다.", author: "토니 로빈스", category: "시간", tags: ["시간", "인생"], mood: "reflective", language: "ko" },
+  { id: "22", text: "과거는 기억이고, 미래는 꿈이다. 오직 현재만이 진실이다.", author: "익명", category: "시간", tags: ["현재", "진실"], mood: "mindful", language: "ko" },
+  
+  // 용기
+  { id: "23", text: "용기는 두려움이 없는 것이 아니라, 두려움을 느끼면서도 행동하는 것이다.", author: "마크 트웨인", category: "용기", tags: ["용기", "두려움"], mood: "brave", language: "ko" },
+  { id: "24", text: "가장 큰 모험은 살아가는 것이다.", author: "헬렌 켈러", category: "용기", tags: ["모험", "삶"], mood: "adventurous", language: "ko" },
+  
+  // 희망
+  { id: "25", text: "희망은 아침의 이슬과 같다. 보이지 않지만 모든 것을 젖게 한다.", author: "익명", category: "희망", tags: ["희망", "생명"], mood: "hopeful", language: "ko" },
+  { id: "26", text: "어둠이 깊을수록 별이 더 밝게 빛난다.", author: "익명", category: "희망", tags: ["어둠", "빛"], mood: "hopeful", language: "ko" },
+  
+  // 영어 명언들
+  { id: "27", text: "The only way to do great work is to love what you do.", author: "Steve Jobs", category: "성공", tags: ["일", "사랑"], mood: "passionate", language: "en" },
+  { id: "28", text: "Be yourself; everyone else is already taken.", author: "Oscar Wilde", category: "자기계발", tags: ["자기", "독창성"], mood: "authentic", language: "en" },
+  { id: "29", text: "Life is what happens to you while you're busy making other plans.", author: "John Lennon", category: "인생철학", tags: ["인생", "계획"], mood: "reflective", language: "en" },
+  { id: "30", text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt", category: "꿈", tags: ["미래", "꿈"], mood: "inspiring", language: "en" },
 ];
 
 export const habits: Habit[] = [
@@ -75,6 +107,55 @@ export const travels: Travel[] = [
 export function getRandomItem<T>(items: T[], seed: number): T {
   const index = seed % items.length;
   return items[index];
+}
+
+// 명언 카테고리 목록
+export const quoteCategories = [
+  "전체", "자기계발", "인생철학", "성공", "사랑", "우정", "시간", "용기", "희망", "꿈"
+];
+
+// 명언 무드 목록
+export const quoteMoods = [
+  "전체", "motivational", "inspirational", "hopeful", "peaceful", "romantic", 
+  "supportive", "encouraging", "reflective", "mindful", "brave", "adventurous", 
+  "creative", "positive", "challenging", "educational", "practical", "resilient", 
+  "authentic", "passionate", "giving", "accepting"
+];
+
+// 명언 필터링 함수들
+export function filterQuotesByCategory(quotes: Quote[], category: string): Quote[] {
+  if (category === "전체") return quotes;
+  return quotes.filter(quote => quote.category === category);
+}
+
+export function filterQuotesByMood(quotes: Quote[], mood: string): Quote[] {
+  if (mood === "전체") return quotes;
+  return quotes.filter(quote => quote.mood === mood);
+}
+
+export function filterQuotesByLanguage(quotes: Quote[], language: string): Quote[] {
+  if (language === "전체") return quotes;
+  return quotes.filter(quote => quote.language === language);
+}
+
+export function searchQuotes(quotes: Quote[], searchTerm: string): Quote[] {
+  if (!searchTerm.trim()) return quotes;
+  const term = searchTerm.toLowerCase();
+  return quotes.filter(quote => 
+    quote.text.toLowerCase().includes(term) ||
+    quote.author.toLowerCase().includes(term) ||
+    quote.tags.some(tag => tag.toLowerCase().includes(term))
+  );
+}
+
+export function getRandomQuoteByCategory(quotes: Quote[], category: string, seed: number): Quote {
+  const filteredQuotes = filterQuotesByCategory(quotes, category);
+  return getRandomItem(filteredQuotes, seed);
+}
+
+export function getRandomQuoteByMood(quotes: Quote[], mood: string, seed: number): Quote {
+  const filteredQuotes = filterQuotesByMood(quotes, mood);
+  return getRandomItem(filteredQuotes, seed);
 }
 
 export function generateFortune(seed: number): {
