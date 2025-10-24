@@ -49,10 +49,10 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
   const [travelPlans, setTravelPlans] = useState<any[]>([]);
   
   const seed = getDailySeed();
-  const todayQuote = getRandomItem(quotes, seed);
-  const todayHabit = getRandomItem(habits, seed + 1);
-  const todayBook = getRandomItem(books, seed + 2);
-  const todayTravel = getRandomItem(travels, seed + 3);
+  const todayQuote = getRandomItem(quotes || [], seed);
+  const todayHabit = getRandomItem(habits || [], seed + 1);
+  const todayBook = getRandomItem(books || [], seed + 2);
+  const todayTravel = getRandomItem(travels || [], seed + 3);
   const todayFortune = generateDailyFortune(userInfo);
   const sajuAnalysis = generateSajuAnalysis(userInfo);
 

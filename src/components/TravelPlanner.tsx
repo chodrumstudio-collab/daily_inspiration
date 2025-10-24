@@ -204,7 +204,7 @@ export function TravelPlanner({ onClose, onSave }: TravelPlannerProps) {
                         <SelectValue placeholder="여행지를 선택하세요" />
                       </SelectTrigger>
                       <SelectContent>
-                        {travels.map((travel) => (
+                        {(travels || []).map((travel) => (
                           <SelectItem key={travel.id} value={travel.place}>
                             {travel.country} {travel.place}
                           </SelectItem>
@@ -243,7 +243,7 @@ export function TravelPlanner({ onClose, onSave }: TravelPlannerProps) {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3 max-h-96 overflow-y-auto">
-                    {travels.map((travel) => (
+                    {(travels || []).map((travel) => (
                       <div
                         key={travel.id}
                         className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50"

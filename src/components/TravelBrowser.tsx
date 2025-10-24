@@ -20,26 +20,26 @@ export function TravelBrowser({ onClose, onFavorite, onShare }: TravelBrowserPro
   const [selectedCountry, setSelectedCountry] = useState('전체');
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [selectedDifficulty, setSelectedDifficulty] = useState('전체');
-  const [filteredTravels, setFilteredTravels] = useState<Travel[]>(travels);
+  const [filteredTravels, setFilteredTravels] = useState<Travel[]>(travels || []);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState('destinations');
 
   useEffect(() => {
-    let result = travels;
+    let result = travels || [];
     
     // 검색어 필터링
     if (searchTerm.trim()) {
       result = result.filter(travel => 
-        travel.place.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        travel.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        travel.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        travel.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+        travel.place?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        travel.country?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        travel.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        travel.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
     
     // 국가 필터링
     if (selectedCountry !== '전체') {
-      result = result.filter(travel => travel.country.includes(selectedCountry));
+      result = result.filter(travel => travel.country?.includes(selectedCountry));
     }
     
     // 카테고리 필터링
