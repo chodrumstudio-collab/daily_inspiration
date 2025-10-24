@@ -121,7 +121,7 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
                 className="rounded-lg hover:bg-gray-100 text-xs sm:text-sm"
               >
                 <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                <span className="hidden sm:inline">명언 브라우저</span>
+                <span className="hidden sm:inline">오늘의 명언</span>
                 <span className="sm:hidden">명언</span>
               </Button>
               <Button
@@ -131,7 +131,7 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
                 className="rounded-lg hover:bg-gray-100 text-xs sm:text-sm"
               >
                 <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                <span className="hidden sm:inline">여행 브라우저</span>
+                <span className="hidden sm:inline">추천 여행지</span>
                 <span className="sm:hidden">여행</span>
               </Button>
               <Button
