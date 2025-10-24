@@ -4,10 +4,12 @@ import { UserInfo } from '../types';
 import { QuoteCard } from './QuoteCard';
 import { HabitCard } from './HabitCard';
 import { FortuneCard } from './FortuneCard';
+import { SajuAnalysisCard } from './SajuAnalysisCard';
 import { BookCard } from './BookCard';
 import { TravelCard } from './TravelCard';
 import { EditInfoModal } from './EditInfoModal';
 import { quotes, habits, books, travels, getRandomItem, generateFortune } from '../data/content';
+import { generateDailyFortune, generateSajuAnalysis } from '../utils/fortuneUtils';
 
 interface DashboardProps {
   userInfo: UserInfo;
@@ -41,7 +43,8 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
   const todayHabit = getRandomItem(habits, seed + 1);
   const todayBook = getRandomItem(books, seed + 2);
   const todayTravel = getRandomItem(travels, seed + 3);
-  const todayFortune = generateFortune(seed);
+  const todayFortune = generateDailyFortune(userInfo);
+  const sajuAnalysis = generateSajuAnalysis(userInfo);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 p-4 md:p-8">
@@ -75,6 +78,9 @@ export function Dashboard({ userInfo, onUpdateInfo }: DashboardProps) {
 
           {/* Fortune Card - Full Width */}
           <FortuneCard userInfo={userInfo} fortune={todayFortune} />
+
+          {/* Saju Analysis Card - Full Width */}
+          <SajuAnalysisCard userInfo={userInfo} saju={sajuAnalysis} />
 
           {/* Book Card */}
           <BookCard book={todayBook} />

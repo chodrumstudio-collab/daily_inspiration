@@ -1,79 +1,138 @@
-import { Calendar } from 'lucide-react';
-import { UserInfo } from '../types';
+import { Calendar, Star, Heart, Briefcase, Activity, DollarSign, AlertTriangle, Lightbulb } from 'lucide-react';
+import { UserInfo, DailyFortune } from '../types';
 
 interface FortuneCardProps {
   userInfo: UserInfo;
-  fortune: {
-    overall: string;
-    love: string;
-    career: string;
-    health: string;
-    luckyColor: string;
-    luckyNumber: number;
-  };
+  fortune: DailyFortune;
 }
 
 export function FortuneCard({ userInfo, fortune }: FortuneCardProps) {
   const age = new Date().getFullYear() - userInfo.birthYear + 1;
+  
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return 'text-green-600';
+    if (score >= 60) return 'text-blue-600';
+    if (score >= 40) return 'text-yellow-600';
+    return 'text-red-600';
+  };
+
+  const getScoreBg = (score: number) => {
+    if (score >= 80) return 'bg-green-50';
+    if (score >= 60) return 'bg-blue-50';
+    if (score >= 40) return 'bg-yellow-50';
+    return 'bg-red-50';
+  };
 
   return (
     <div className="bg-white rounded-3xl shadow-lg p-8 col-span-full">
       <div className="flex items-center gap-2 mb-6">
         <Calendar className="w-6 h-6 text-purple-500" />
         <h2 className="text-gray-900">오늘의 운세</h2>
+        <span className="text-sm text-gray-500 ml-auto">{fortune.date}</span>
       </div>
       
       <div className="mb-6">
         <p className="text-gray-700">
           {userInfo.name}님의 오늘의 운세 ({userInfo.zodiac}띠, {age}세)
         </p>
+        <p className="text-gray-600 mt-2">{fortune.description}</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="space-y-4">
-          <div className="bg-purple-50 rounded-2xl p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">🌟</span>
-              <h3 className="text-purple-900">전체운</h3>
-            </div>
-            <p className="text-gray-700">{fortune.overall}</p>
+      {/* 운세 점수 표시 */}
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+        <div className={`${getScoreBg(fortune.overall)} rounded-2xl p-4`}>
+          <div className="flex items-center gap-2 mb-2">
+            <Star className="w-5 h-5 text-purple-600" />
+            <h3 className="text-purple-900 font-medium">전체운</h3>
           </div>
-
-          <div className="bg-pink-50 rounded-2xl p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">💕</span>
-              <h3 className="text-pink-900">애정운</h3>
-            </div>
-            <p className="text-gray-700">{fortune.love}</p>
+          <div className={`text-2xl font-bold ${getScoreColor(fortune.overall)}`}>
+            {fortune.overall}
           </div>
+        </div>
 
-          <div className="bg-blue-50 rounded-2xl p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">💼</span>
-              <h3 className="text-blue-900">사업운</h3>
+        <div className={`${getScoreBg(fortune.love)} rounded-2xl p-4`}>
+          <div className="flex items-center gap-2 mb-2">
+            <Heart className="w-5 h-5 text-pink-600" />
+            <h3 className="text-pink-900 font-medium">애정운</h3>
+          </div>
+          <div className={`text-2xl font-bold ${getScoreColor(fortune.love)}`}>
+            {fortune.love}
+          </div>
+        </div>
+
+        <div className={`${getScoreBg(fortune.career)} rounded-2xl p-4`}>
+          <div className="flex items-center gap-2 mb-2">
+            <Briefcase className="w-5 h-5 text-blue-600" />
+            <h3 className="text-blue-900 font-medium">사업운</h3>
+          </div>
+          <div className={`text-2xl font-bold ${getScoreColor(fortune.career)}`}>
+            {fortune.career}
+          </div>
+        </div>
+
+        <div className={`${getScoreBg(fortune.health)} rounded-2xl p-4`}>
+          <div className="flex items-center gap-2 mb-2">
+            <Activity className="w-5 h-5 text-green-600" />
+            <h3 className="text-green-900 font-medium">건강운</h3>
+          </div>
+          <div className={`text-2xl font-bold ${getScoreColor(fortune.health)}`}>
+            {fortune.health}
+          </div>
+        </div>
+
+        <div className={`${getScoreBg(fortune.money)} rounded-2xl p-4`}>
+          <div className="flex items-center gap-2 mb-2">
+            <DollarSign className="w-5 h-5 text-yellow-600" />
+            <h3 className="text-yellow-900 font-medium">재물운</h3>
+          </div>
+          <div className={`text-2xl font-bold ${getScoreColor(fortune.money)}`}>
+            {fortune.money}
+          </div>
+        </div>
+      </div>
+
+      {/* 행운의 요소들 */}
+      <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <span className="text-2xl">🍀</span>
+            행운의 요소
+          </h3>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-sm text-gray-600 mb-1">색상</p>
+              <p className="font-medium text-gray-900">{fortune.luckyElements.color}</p>
             </div>
-            <p className="text-gray-700">{fortune.career}</p>
+            <div>
+              <p className="text-sm text-gray-600 mb-1">숫자</p>
+              <p className="font-medium text-gray-900">{fortune.luckyElements.number}</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600 mb-1">방향</p>
+              <p className="font-medium text-gray-900">{fortune.luckyElements.direction}</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600 mb-1">시간</p>
+              <p className="font-medium text-gray-900">{fortune.luckyElements.time}</p>
+            </div>
           </div>
         </div>
 
         <div className="space-y-4">
-          <div className="bg-green-50 rounded-2xl p-4">
+          <div className="bg-blue-50 rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">💪</span>
-              <h3 className="text-green-900">건강운</h3>
+              <Lightbulb className="w-5 h-5 text-blue-600" />
+              <h3 className="text-blue-900 font-medium">오늘의 조언</h3>
             </div>
-            <p className="text-gray-700">{fortune.health}</p>
+            <p className="text-gray-700 text-sm">{fortune.advice}</p>
           </div>
 
-          <div className="bg-yellow-50 rounded-2xl p-4">
+          <div className="bg-orange-50 rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">🍀</span>
-              <h3 className="text-yellow-900">행운의 요소</h3>
+              <AlertTriangle className="w-5 h-5 text-orange-600" />
+              <h3 className="text-orange-900 font-medium">주의사항</h3>
             </div>
-            <div className="space-y-2 text-gray-700">
-              <p>행운의 색상: <span className="font-medium">{fortune.luckyColor}</span></p>
-              <p>행운의 숫자: <span className="font-medium">{fortune.luckyNumber}</span></p>
-            </div>
+            <p className="text-gray-700 text-sm">{fortune.warning}</p>
           </div>
         </div>
       </div>
