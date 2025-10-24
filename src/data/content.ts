@@ -316,6 +316,9 @@ export const travelGuides: TravelGuide[] = [
 ];
 
 export function getRandomItem<T>(items: T[], seed: number): T {
+  if (!items || items.length === 0) {
+    return {} as T;
+  }
   const index = seed % items.length;
   return items[index];
 }
@@ -335,27 +338,31 @@ export const quoteMoods = [
 
 // 명언 필터링 함수들
 export function filterQuotesByCategory(quotes: Quote[], category: string): Quote[] {
+  if (!quotes || quotes.length === 0) return [];
   if (category === "전체") return quotes;
-  return quotes.filter(quote => quote.category === category);
+  return quotes.filter(quote => quote?.category === category);
 }
 
 export function filterQuotesByMood(quotes: Quote[], mood: string): Quote[] {
+  if (!quotes || quotes.length === 0) return [];
   if (mood === "전체") return quotes;
-  return quotes.filter(quote => quote.mood === mood);
+  return quotes.filter(quote => quote?.mood === mood);
 }
 
 export function filterQuotesByLanguage(quotes: Quote[], language: string): Quote[] {
+  if (!quotes || quotes.length === 0) return [];
   if (language === "전체") return quotes;
-  return quotes.filter(quote => quote.language === language);
+  return quotes.filter(quote => quote?.language === language);
 }
 
 export function searchQuotes(quotes: Quote[], searchTerm: string): Quote[] {
+  if (!quotes || quotes.length === 0) return [];
   if (!searchTerm.trim()) return quotes;
   const term = searchTerm.toLowerCase();
   return quotes.filter(quote => 
-    quote.text.toLowerCase().includes(term) ||
-    quote.author.toLowerCase().includes(term) ||
-    quote.tags.some(tag => tag.toLowerCase().includes(term))
+    quote?.text?.toLowerCase().includes(term) ||
+    quote?.author?.toLowerCase().includes(term) ||
+    quote?.tags?.some(tag => tag.toLowerCase().includes(term))
   );
 }
 
@@ -419,11 +426,11 @@ export function generateFortune(seed: number): {
   const colors = ["보라색", "분홍색", "파란색", "초록색", "노란색", "주황색", "하늘색"];
 
   return {
-    overall: fortunes.overall[seed % fortunes.overall.length],
-    love: fortunes.love[(seed * 2) % fortunes.love.length],
-    career: fortunes.career[(seed * 3) % fortunes.career.length],
-    health: fortunes.health[(seed * 5) % fortunes.health.length],
-    luckyColor: colors[seed % colors.length],
+    overall: fortunes.overall[seed % fortunes.overall.length] || "오늘은 평범한 하루입니다.",
+    love: fortunes.love[(seed * 2) % fortunes.love.length] || "사랑하는 사람과 좋은 시간을 보내세요.",
+    career: fortunes.career[(seed * 3) % fortunes.career.length] || "업무에 집중하세요.",
+    health: fortunes.health[(seed * 5) % fortunes.health.length] || "건강 관리에 신경 쓰세요.",
+    luckyColor: colors[seed % colors.length] || "파란색",
     luckyNumber: (seed % 99) + 1,
   };
 }

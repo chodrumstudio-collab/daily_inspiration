@@ -21,30 +21,39 @@ export function QuoteStats({ favoriteQuotes, onClose }: QuoteStatsProps) {
   });
 
   useEffect(() => {
+    const quotesArray = quotes || [];
+    const favoritesArray = favoriteQuotes || [];
+    
     // 카테고리별 통계
-    const categoryStats = quotes.reduce((acc, quote) => {
-      acc[quote.category] = (acc[quote.category] || 0) + 1;
+    const categoryStats = quotesArray.reduce((acc, quote) => {
+      if (quote?.category) {
+        acc[quote.category] = (acc[quote.category] || 0) + 1;
+      }
       return acc;
     }, {} as { [key: string]: number });
 
     // 무드별 통계
-    const moodStats = quotes.reduce((acc, quote) => {
-      acc[quote.mood] = (acc[quote.mood] || 0) + 1;
+    const moodStats = quotesArray.reduce((acc, quote) => {
+      if (quote?.mood) {
+        acc[quote.mood] = (acc[quote.mood] || 0) + 1;
+      }
       return acc;
     }, {} as { [key: string]: number });
 
     // 언어별 통계
-    const languageStats = quotes.reduce((acc, quote) => {
-      acc[quote.language] = (acc[quote.language] || 0) + 1;
+    const languageStats = quotesArray.reduce((acc, quote) => {
+      if (quote?.language) {
+        acc[quote.language] = (acc[quote.language] || 0) + 1;
+      }
       return acc;
     }, {} as { [key: string]: number });
 
     // 최근 즐겨찾기한 명언들
-    const recentFavorites = quotes.filter(quote => favoriteQuotes.includes(quote.id));
+    const recentFavorites = quotesArray.filter(quote => favoritesArray.includes(quote.id));
 
     setStats({
-      totalQuotes: quotes.length,
-      favoriteCount: favoriteQuotes.length,
+      totalQuotes: quotesArray.length,
+      favoriteCount: favoritesArray.length,
       categoryStats,
       moodStats,
       languageStats,

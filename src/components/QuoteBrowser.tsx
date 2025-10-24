@@ -27,11 +27,11 @@ export function QuoteBrowser({ onClose, onFavorite, onShare }: QuoteBrowserProps
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [selectedMood, setSelectedMood] = useState('전체');
   const [selectedLanguage, setSelectedLanguage] = useState('전체');
-  const [filteredQuotes, setFilteredQuotes] = useState<Quote[]>(quotes);
+  const [filteredQuotes, setFilteredQuotes] = useState<Quote[]>(quotes || []);
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
-    let result = quotes;
+    let result = quotes || [];
     
     // 검색어 필터링
     if (searchTerm.trim()) {

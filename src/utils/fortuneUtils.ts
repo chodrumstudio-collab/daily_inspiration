@@ -76,15 +76,17 @@ export function generateDailyFortune(userInfo: UserInfo): DailyFortune {
   };
   
   const overallLevel = getFortuneLevel(overall);
-  const description = fortuneMessages[overallLevel][Math.floor(random(3.1)) % fortuneMessages[overallLevel].length];
+  const levelMessages = fortuneMessages[overallLevel] || [];
+  const description = levelMessages[Math.floor(random(3.1)) % levelMessages.length] || "오늘은 새로운 기회가 찾아올 수 있는 날입니다.";
   
   // 행운의 요소들
   const elements = ['wood', 'fire', 'earth', 'metal', 'water'];
   const luckyElement = elements[Math.floor(random(4.2)) % elements.length];
-  const luckyColor = elementColors[luckyElement][Math.floor(random(2.7)) % elementColors[luckyElement].length];
+  const elementColorsArray = elementColors[luckyElement] || [];
+  const luckyColor = elementColorsArray[Math.floor(random(2.7)) % elementColorsArray.length] || '파란색';
   const luckyNumber = Math.floor(random(5.3)) % 9 + 1;
-  const luckyDirection = directions[Math.floor(random(6.1)) % directions.length];
-  const luckyTime = timeSlots[Math.floor(random(7.2)) % timeSlots.length];
+  const luckyDirection = directions[Math.floor(random(6.1)) % directions.length] || '동쪽';
+  const luckyTime = timeSlots[Math.floor(random(7.2)) % timeSlots.length] || '오전';
   
   // 조언과 주의사항
   const advice = getAdvice(overallLevel, userInfo.zodiac);
